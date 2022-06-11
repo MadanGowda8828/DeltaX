@@ -1,0 +1,20 @@
+
+CREATE TABLE Actor ( 
+Id INT NOT NULL IDENTITY(1,1) ,
+Name VARCHAR(50) NOT NULL,
+Bio VARCHAR(255), 
+DateOfBirth DATE, 
+Gender VARCHAR(10), 
+CreatedDateTime DATETIME, 
+CreatedBy VARCHAR(50),
+ModifiedBy VARCHAR(50),
+ModifiedDateTime DATETIME,
+IsActive BIT,
+IsDeleted BIT
+) 
+
+ALTER TABLE Actor ADD CONSTRAINT PK_Actor PRIMARY KEY (Id);
+ALTER TABLE Actor ADD CONSTRAINT DF_Creationdatetime DEFAULT getdate() FOR CreatedDateTime;
+ALTER TABLE Actor ADD CONSTRAINT DF_CreationBy DEFAULT 'User' FOR CreatedBy;
+ALTER TABLE Actor ADD CONSTRAINT DF_Activation DEFAULT 1 FOR IsActive;
+ALTER TABLE Actor ADD CONSTRAINT DF_Deletion DEFAULT 0 FOR IsDeleted;

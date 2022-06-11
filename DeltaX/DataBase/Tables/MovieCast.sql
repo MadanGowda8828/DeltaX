@@ -1,0 +1,20 @@
+
+CREATE TABLE MovieCast ( 
+Id INT NOT NULL IDENTITY(1,1),
+MovieId INT,
+ActorId INT,
+CreatedDateTime DATETIME, 
+CreatedBy VARCHAR(20),
+UpdatedBy VARCHAR(20),
+UpdatedDateTime DATETIME,
+IsActive BIT,
+IsDeleted BIT
+) 
+
+ALTER TABLE MovieCast ADD CONSTRAINT FK_ActorId FOREIGN KEY (ActorId) REFERENCES Actor(Id);
+ALTER TABLE MovieCast ADD CONSTRAINT FK_MovieId FOREIGN KEY (MovieId) REFERENCES Movie(Id);
+ALTER TABLE MovieCast ADD CONSTRAINT PK_Cast PRIMARY KEY (Id);
+ALTER TABLE MovieCast ADD CONSTRAINT df_CrbcxDateTime DEFAULT getdate() FOR CreatedDateTime;
+ALTER TABLE MovieCast ADD CONSTRAINT df_Crbnzatedby DEFAULT 'User' FOR CreatedBy;
+ALTER TABLE MovieCast ADD CONSTRAINT DF_ActivationStatus DEFAULT 1 FOR IsActive;
+ALTER TABLE MovieCast ADD CONSTRAINT DF_DeletedStatus DEFAULT 0 FOR IsDeleted;
